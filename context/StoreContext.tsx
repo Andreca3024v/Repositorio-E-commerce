@@ -1,11 +1,11 @@
-// context/StoreContext.tsx (CORREGIDO Y ESTABILIZADO)
+
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useCallback, useContext, useEffect, useState, ReactNode } from 'react';
 import { Alert } from 'react-native';
 import { CATEGORY_ANIME, INITIAL_PRODUCTS, INITIAL_RATE, INITIAL_USERS, ROLES, STORAGE_KEYS } from '../constants';
 
-// Tipos para usuario, producto y carrito
+
 export interface User {
     password: string;
     role: string;
@@ -69,12 +69,11 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         const [cart, setCart] = useState<CartItem[]>([]);
         const [exchangeRate, setExchangeRate] = useState<number>(INITIAL_RATE);
 
-    // --- Persistencia (Cargar y Guardar Datos) ---
     useEffect(() => {
         const loadData = async () => {
             try {
                 const storedUsers = await AsyncStorage.getItem(STORAGE_KEYS.USERS);
-                // NOTA: Mantenemos el INITIAL_USERS original para compatibilidad
+              
                 setUsers(storedUsers ? JSON.parse(storedUsers) : INITIAL_USERS); 
 
                 const storedProducts = await AsyncStorage.getItem(STORAGE_KEYS.PRODUCTS);
@@ -103,9 +102,9 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         AsyncStorage.setItem(STORAGE_KEYS.RATE, exchangeRate.toString());
     }, [exchangeRate]);
     
-    // Guardar el carrito en el usuario activo cuando cambia
+
     useEffect(() => {
-        if (currentUser && currentUser.username) { // Aseguramos que haya un usuario
+        if (currentUser && currentUser.username) { 
             setUsers(prevUsers => ({
                 ...prevUsers,
                 [currentUser.username]: { ...prevUsers[currentUser.username], cart: cart }
@@ -114,7 +113,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     }, [cart, currentUser]);
 
 
-    // --- GESTIÓN DE AUTENTICACIÓN (CORRECCIÓN CLAVE AQUÍ) ---
+    
 
     const handleRegister = useCallback((username: string, password: string, email?: string): boolean => {
         if (users[username]) {
@@ -125,7 +124,6 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
             Alert.alert('Error', 'Usuario o contraseña muy cortos.');
             return false;
         }
-        // Aseguramos que el nuevo usuario se guarde con un objeto de carrito vacío para evitar fallos
         const newUsers = { ...users, [username]: { password, role: ROLES.CUSTOMER, cart: [], email } };
         setUsers(newUsers);
         Alert.alert('Éxito', 'Registro exitoso. ¡Inicia sesión!');
@@ -146,7 +144,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     const handleLogout = useCallback((): void => {
         setCurrentUser(null);
         setCart([]);
-        // ❌ ELIMINAMOS setCurrentScreen('login');
+      
     }, []);
 
 
@@ -179,7 +177,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
             }
         });
         Alert.alert('🛒 Carrito', '¡Producto añadido correctamente!');
-    }, [getProductById, cart]); // Agregamos 'cart' para que el stock check funcione bien
+    }, [getProductById, cart]); 
 
     const updateCartItemQuantity = useCallback((productId: string, newQuantity: number): void => {
         if (newQuantity <= 0) {
@@ -268,7 +266,6 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     // --- VALORES DEL CONTEXTO ---
     const contextValue: StoreContextType = {
         loading,
-        // Eliminamos currentScreen
         currentUser,
         products,
         cart,
