@@ -43,7 +43,7 @@ export default function AuthScreen() {
         >
             <Image source={LOGO_IMAGE} style={globalStyles.logo} resizeMode="contain" />
             
-            {/* ELIMINADA: <Text style={globalStyles.appTagline}>La cumbre de las colecciones.</Text> */}
+            
             
             <Text style={globalStyles.authTitle}>{isRegister ? 'Registro de Nuevo Usuario' : 'Inicio de Sesión'}</Text>
             
