@@ -327,7 +327,7 @@ export const styles = StyleSheet.create({
         color: '#1C1C1C',
     },
 
-    // --- Navigation Bar Styles (from app/index.tsx) ---
+    // --- Navigation Bar Styles 
     navButton: {
         alignItems: 'center',
         paddingTop: 5,
