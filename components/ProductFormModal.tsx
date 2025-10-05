@@ -1,21 +1,20 @@
-// components/ProductFormModal.tsx
+
 
 import React, { useEffect, useState } from 'react';
 import { Alert, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles as globalStyles } from '../styles/globalStyles';
 
-// Tipado básico del producto
+
 import { Product } from '../context/StoreContext';
 
 interface ProductFormModalProps {
     isVisible: boolean;
     onClose: () => void;
     onSubmit: (productData: Product) => void;
-    // Si se pasa un producto, estamos editando; si es null, estamos creando
     productToEdit: Product | null; 
 }
 
-// Estado inicial del formulario
+
 const initialFormState: Product = {
     id: '',
     name: '',
@@ -23,20 +22,19 @@ const initialFormState: Product = {
     priceUSD: 0,
     stock: 0,
     image: '',
-    category: 'Figuras de Anime', // Usa CATEGORY_ANIME si tienes la constante
+    category: 'Figuras de Anime', 
 };
 
 export default function ProductFormModal({ isVisible, onClose, onSubmit, productToEdit }: ProductFormModalProps) {
     const [formData, setFormData] = useState<Product>(initialFormState);
 
-    // Cargar datos del producto si estamos editando
+    
     useEffect(() => {
         if (productToEdit) {
-            // Asegurarse de que los números sean manejados como cadenas para los TextInput
             setFormData({
                 ...productToEdit,
-                priceUSD: productToEdit.priceUSD.toString() as any, // Convierte a string temporalmente
-                stock: productToEdit.stock.toString() as any,     // Convierte a string temporalmente
+                priceUSD: productToEdit.priceUSD.toString() as any, 
+                stock: productToEdit.stock.toString() as any,     
             });
         } else {
             setFormData(initialFormState);
@@ -87,7 +85,7 @@ export default function ProductFormModal({ isVisible, onClose, onSubmit, product
                 <View style={globalStyles.modalContent}>
                     <Text style={globalStyles.modalTitle}>{title}</Text>
                     
-                    {/* Nombre */}
+                    {}
                     <Text style={globalStyles.formLabel}>Nombre</Text>
                     <TextInput
                         style={globalStyles.input}
@@ -96,7 +94,7 @@ export default function ProductFormModal({ isVisible, onClose, onSubmit, product
                         onChangeText={(text) => handleChange('name', text)}
                     />
 
-                    {/* Descripción */}
+                    {}
                     <Text style={globalStyles.formLabel}>Descripción</Text>
                     <TextInput
                         style={globalStyles.input}
@@ -107,7 +105,7 @@ export default function ProductFormModal({ isVisible, onClose, onSubmit, product
                     />
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        {/* Precio USD */}
+                        {}
                         <View style={{ flex: 1, marginRight: 10 }}>
                             <Text style={globalStyles.formLabel}>Precio (USD)</Text>
                             <TextInput
@@ -119,7 +117,7 @@ export default function ProductFormModal({ isVisible, onClose, onSubmit, product
                             />
                         </View>
 
-                        {/* Stock */}
+                        {}
                         <View style={{ flex: 1 }}>
                             <Text style={globalStyles.formLabel}>Stock</Text>
                             <TextInput
@@ -132,7 +130,7 @@ export default function ProductFormModal({ isVisible, onClose, onSubmit, product
                         </View>
                     </View>
 
-                    {/* Imagen o Emoji */}
+                    {}
                     <Text style={globalStyles.formLabel}>Imagen/Emoji (Icono)</Text>
                     <TextInput
                         style={globalStyles.input}
