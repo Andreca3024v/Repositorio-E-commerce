@@ -14,9 +14,9 @@ type FormState = {
   name: string;
   description: string;
   priceUSD: string;
-  image: string; // Puede ser emoji o URI de imagen
+  image: string; 
   stock: string;
-  imageUri?: string; // URI de la imagen seleccionada
+  imageUri?: string;
 };
 
 const initialFormState: FormState = {
