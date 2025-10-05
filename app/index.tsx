@@ -1,4 +1,4 @@
-// app/index.tsx (ACTUALIZADO CON PESTAÑA DE GESTIÓN)
+
 
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
@@ -14,10 +14,10 @@ import { styles as globalStyles } from '../styles/globalStyles';
 import AuthScreen from '../screens/AuthScreen';
 import CartScreen from '../screens/CartScreen';
 import HomeScreen from '../screens/HomeScreen';
-import ManagementScreen from '../screens/ManagementScreen'; // 🚨 IMPORTAR la nueva pantalla
+import ManagementScreen from '../screens/ManagementScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
-// --- Definición de Pestañas de Navegación (Gestión incluida y accesible) ---
+
 const TABS = [
     { name: 'Home', component: HomeScreen, icon: 'home' },
     { name: 'Cart', component: CartScreen, icon: 'shopping-cart' },
@@ -37,7 +37,6 @@ function TabBar() {
                 <ActiveScreen />
             </SafeAreaView>
 
-            {/* Barra de Navegación Inferior */}
             <View style={{ flexDirection: 'row', height: 90, borderTopWidth: 1, borderTopColor: '#E5E5EA', backgroundColor: '#fff' }}>
                 {TABS.map((tab) => (
                     <NavButton
@@ -74,7 +73,6 @@ function AppContent() {
         );
     }
     
-    // El TabBar se renderiza solo si hay un currentUser
     if (!currentUser) { 
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
